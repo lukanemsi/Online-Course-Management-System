@@ -20,7 +20,7 @@ public class UserMaskingUtil {
         maskedUser.setPassword(MASKED_PASSWORD);
 
         Set<RoleDTO> maskedRoles = new HashSet<>();
-        for (RoleDTO role : user.getRoles()) {
+        if(!user.getRoles().isEmpty()) {
             RoleDTO maskedRole = new RoleDTO();
             maskedRole.setName(MASKED_ROLE);
             maskedRoles.add(maskedRole);

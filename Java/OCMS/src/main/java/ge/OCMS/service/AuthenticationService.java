@@ -3,6 +3,7 @@ package ge.OCMS.service;
 import ge.OCMS.configuration.jwt.JwtService;
 import ge.OCMS.entity.Role;
 import ge.OCMS.entity.User;
+import ge.OCMS.exception.custom.EntityNotFoundException;
 import ge.OCMS.exception.custom.InvalidRequestException;
 import ge.OCMS.repository.RoleRepository;
 import ge.OCMS.repository.UserRepository;
@@ -56,7 +57,9 @@ public class AuthenticationService {
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
         authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        var jwtToken = jwtService.generateJwtToken((userRepository.findByUsername(user.getUsername()).orElseThrow()));
+        var jwtToken = jwtService.generateJwtToken((userRepository.findByUsername(user.getUsername()).orElseThrow(
+                () -> new EntityNotFoundException("User Not Found")
+        )));
         UserDTO maskedDTO = UserMaskingUtil.maskUser(userDTO);
         log.debug("User authenticated: {}", JsonConverter.toJson(maskedDTO));
         return new ResponseEntity<>(AuthenticationResponse.builder()

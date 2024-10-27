@@ -2,6 +2,7 @@ package ge.OCMS.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Component;
 @Log4j2
 public class JsonConverter {
 
-    private final static ObjectMapper objectMapper = new ObjectMapper();
+    private final static ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule());
 
     private JsonConverter() {
     }
@@ -25,12 +27,4 @@ public class JsonConverter {
         return t.toString();
     }
 
-    public static <T> T toEntity(String json, Class<T> c) {
-        try {
-            return objectMapper.readValue(json, c);
-        } catch (JsonProcessingException e) {
-            log.warn("Could not convert entity");
-        }
-        return null;
-    }
 }
