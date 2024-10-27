@@ -29,6 +29,8 @@ public class RequestMatcherConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/courses/**").hasAnyAuthority(RoleEnum.STUDENT.getValue(), RoleEnum.INSTRUCTOR.getValue())
                         .requestMatchers("/courses/**").hasAuthority(RoleEnum.INSTRUCTOR.getValue())
