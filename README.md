@@ -15,26 +15,22 @@ For comprehensive information on features, API endpoints, user roles and permiss
 ## Getting Started
 
 ### Prerequisites
-
-- Java 21 or later
-- Maven 3.8 or later
-- (Optional) Docker for containerized setup
+- Docker for containerized setup
 
 ## Installation
 
-Clone the repository:
+Clone the image:
 
 ```bash
-git clone https://github.com/yourusername/ocms.git
-cd ocms
+docker pull lukanemsitsveridze/ocms:1
 ```
 
 ## Running the Application
 
-Start the application using:
+Start the application container:
 
 ```bash
-mvn spring-boot:run
+docker run -d --name ocms -p 8080:8080 lukanemsitsveridze/ocms:1
 ```
 
 The application will be accessible at http://localhost:8080.

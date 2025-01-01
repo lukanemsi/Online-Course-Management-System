@@ -11,7 +11,7 @@
 	<groupId>ge</groupId>
 	<artifactId>OCMS</artifactId>
 	<version>1.0.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>Online Course Management System</name>
 	<description>project for course management system </description>
 	<url/>
